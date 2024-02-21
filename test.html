@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="s">
+  <form action="aa" method="get" id="a">
+    <button type="submit">전송</button>
+  </form>
+  
+  <div>
+    <button id="button">버튼</button>
+    <div id="div1"></div>
+  </div>
+
+  <script>
+
+    function d() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://thetestrequest.com/authors.xml");
+    xhr.send();
+    xhr.onreadystatechange = function () {
+      if(xhr.readyState !== XMLHttpRequest.DONE)
+      return;
+      if(xhr.status !== 200)
+      return;
+
+      var resData = xhr.responseXML;
+      var obj = resData.getElementsByTagName('object');
+      var result = '';
+
+      for(var i=0; i<obj.length; i++){
+        result += '<div> id:' + obj[i].querySelector('id').textContent + '</div>';
+        result += '<div> name:' + obj[i].querySelector('name').textContent + '</div>';
+        result += '<div> avatar:' + obj[i].querySelector('avatar').textContent + '</div>';
+      
+      }
+
+      document.getElementById('div1').innerHTML = result;
+    }
+ 
+    
+  }
+ 
+  document.getElementById('button').onclick = function() {
+      d();
+    }
+
+      
+
+
+
+
+    
+
+    
+   
+
+  </script>
+  
+</body>
+</html>
